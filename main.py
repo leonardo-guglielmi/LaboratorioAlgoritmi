@@ -13,6 +13,7 @@ def main():
 
     # il del dell'insieme si può fare anche fuori dalla funzione union o lo devo mettere lì?
 
+
 if __name__ == '__main__':
     main()
 
