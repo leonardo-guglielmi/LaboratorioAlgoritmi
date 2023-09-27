@@ -1,17 +1,17 @@
 import quickFind as qf
 import quickUnion as qu
+import numpy
 
 
 def main():
-    elemento = qu.Element(10)
-    set1 = qu.make_set(elemento)
-    elemento2 = qu.Element(12)
-    set2 = qu.make_set(elemento2)
-    qu.union(set1, set2)
-    print(qu.find(elemento))
-    print(qu.find(elemento2))
 
-    # il del dell'insieme si può fare anche fuori dalla funzione union o lo devo mettere lì?
+    # generazione di un grafo casuale ==================================================================================
+    N = 20
+    graph = numpy.random.randint(low=0, high=2, size=(N, N))
+    # mi accerto che non ci siano valori sulla diagonale
+    for i in range(N):
+        graph[i][i] = 0
+    print(graph)
 
 
 if __name__ == '__main__':
