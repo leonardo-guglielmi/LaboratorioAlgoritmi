@@ -1,5 +1,5 @@
-import ListaConcatenata as lc
-import ForesteInsiemiDisgiunti as fi
+import ListaConcatenataOld as lc
+import ForesteInsiemiDisgiuntiOld as fi
 import numpy
 from timeit import default_timer as timer
 import matplotlib.pyplot as plt

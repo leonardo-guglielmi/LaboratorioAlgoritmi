@@ -47,10 +47,10 @@ def connect_components_foreste(graph, vertex, time_log):
                 fi.timed_union(vertex[i].set, vertex[j].set, time_log)
 
 def main():
-    max_dim = 300
+    max_dim = 200
     min_dim = 10
     num_dim = max_dim - min_dim
-    num_iter = 100
+    num_iter = 70
 
     lc_time = numpy.zeros(num_dim)
     lch_time = numpy.zeros(num_dim)
@@ -58,6 +58,10 @@ def main():
 
     for i in range(max_dim - min_dim):
         print("inizio iter con dimensione ", i)
+
+        lc_time_log = tl.TimeLog()
+        lch_time_log = tl.TimeLog()
+        fi_time_log = tl.TimeLog()
 
         for j in range(num_iter):
             # creo i vari vertici
@@ -69,9 +73,9 @@ def main():
             graph = make_graph(i + min_dim)
 
             # eseguo i vari algoritmi e registro i tempi
-            lc_time_log = tl.TimeLog()
-            lch_time_log = tl.TimeLog()
-            fi_time_log = tl.TimeLog()
+            lc_time_log.t = 0
+            lch_time_log.t = 0
+            fi_time_log.t = 0
 
             connect_components_lista(graph, lc_vertex, lc_time_log)
             connect_components_hlista(graph, lch_vertex, lch_time_log)
