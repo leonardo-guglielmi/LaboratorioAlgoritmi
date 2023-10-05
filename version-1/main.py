@@ -47,10 +47,10 @@ def connect_components_foreste(graph, vertex, time_log):
                 fi.timed_union(vertex[i].set, vertex[j].set, time_log)
 
 def main():
-    max_dim = 200
+    max_dim = 1000
     min_dim = 10
     num_dim = max_dim - min_dim
-    num_iter = 70
+    num_iter = 80
 
     lc_time = numpy.zeros(num_dim)
     lch_time = numpy.zeros(num_dim)
