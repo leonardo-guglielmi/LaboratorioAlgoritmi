@@ -1,7 +1,0 @@
->> main
-la generazione del grafo funziona, c'è da fare il resto de test
-
->> lista concatenata
-ok funziona tutto
-
->> foreste alberi disgiunti

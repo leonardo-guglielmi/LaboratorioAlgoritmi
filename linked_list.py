@@ -5,17 +5,14 @@ class Element:
         self.next = None
 
 
-# lista concatenata standard ===========================================================================================
-
-
-class ChainedList:
+class LinkedList:
     def __init__(self, e):
         self.head = e
         self.tail = e
 
 
 def make_set(e):
-    s = ChainedList(e)
+    s = LinkedList(e)
     e.set = s
     e.next = None
 
@@ -36,10 +33,7 @@ def union(A, B):
             i = i.next
 
 
-# lista concatenata pesata =============================================================================================
-
-
-class HeuristicsChainedList:
+class HeuristicsLinkedList:
     def __init__(self, e):
         self.head = e
         self.tail = e
@@ -47,7 +41,7 @@ class HeuristicsChainedList:
 
 
 def heuristics_make_set(e):
-    s = HeuristicsChainedList(e)
+    s = HeuristicsLinkedList(e)
     e.set = s
     e.next = None
 

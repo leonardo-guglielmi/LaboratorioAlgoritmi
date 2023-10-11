@@ -1,4 +1,4 @@
-class SetTreeElement:
+class Element:
     def __init__(self, name):
         self.name = name
         self.father = None
@@ -9,10 +9,11 @@ def make_set(e):
 
 
 def union(A, B):
-    B.father = A
+    find(B).father = find(A)
 
 
 def find(e):
-    if e is not e.father:
+    if e.father is not e:
         e.father = find(e.father)
     return e.father
+
