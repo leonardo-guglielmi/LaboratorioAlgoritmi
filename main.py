@@ -61,7 +61,7 @@ def connect_components_forest(graph, vertex, counter):
 
 
 def main():
-    max_dim = 510
+    max_dim = 20
     min_dim = 10
     dim = max_dim - min_dim
     num_iter_for_dim = 100
@@ -187,9 +187,8 @@ def main():
     plot_count_llh_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
     plot_count_sf_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
 
-    plt.show()
+    plt.savefig("test.png")
 
 
 if __name__ == '__main__':
     main()
-

@@ -22,7 +22,6 @@ def find(e):
 
 
 def union(A, B):
-    # accodo all'insieme A l'insieme B
     if A is not B:
         A.tail.next = B.head
         A.tail = B.tail
