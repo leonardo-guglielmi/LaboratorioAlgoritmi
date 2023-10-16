@@ -61,10 +61,10 @@ def connect_components_forest(graph, vertex, counter):
 
 
 def main():
-    max_dim = 20
+    max_dim = 510
     min_dim = 10
     dim = max_dim - min_dim
-    num_iter_for_dim = 100
+    num_iter_for_dim = 50
 
     ll_time = numpy.zeros(dim)
     llh_time = ll_time.copy()
@@ -114,6 +114,10 @@ def main():
 
     x_axis = [i for i in range(min_dim, max_dim)]
 
+    ll_patch = mpatch.Patch(color='orange', label='linked list')
+    llh_patch = mpatch.Patch(color='lime', label='linked list heuristics')
+    sf_patch = mpatch.Patch(color='cyan', label='set forest')
+
     img_res, plot_res = plt.subplots()
     plot_res.plot(x_axis, ll_time, color="orange")
     plot_res.plot(x_axis, llh_time, color="lime")
@@ -121,6 +125,12 @@ def main():
     plot_res.set_title("Confronto calcolo algoritmi componenti connesse")
     plot_res.set_ylabel("tempo impiegato (secondi)")
     plot_res.set_xlabel("numero di vertici nel grafo")
+    plot_res.legend(handles=[ll_patch, llh_patch, sf_patch])
+    plt.savefig("images/result.png")
+
+    num_make_patch = mpatch.Patch(color='red', label='make_set')
+    num_find_patch = mpatch.Patch(color='green', label='find')
+    num_union_patch = mpatch.Patch(color='blue', label='union')
 
     img_count_ll, plot_count_ll = plt.subplots()
     plot_count_ll.plot(x_axis, ll_operation_counter[0], color="red")
@@ -129,6 +139,8 @@ def main():
     plot_count_ll.set_title("Operazioni eseguite con LINKED LIST")
     plot_count_ll.set_ylabel("numero operazioni")
     plot_count_ll.set_xlabel("numero di vertici nel grafo")
+    plot_count_ll.legend(handles=[num_make_patch, num_find_patch, num_union_patch])
+    plt.savefig("images/count_ll.png")
 
     img_count_llh, plot_count_llh = plt.subplots()
     plot_count_llh.plot(x_axis, llh_operation_counter[0], color="red")
@@ -137,6 +149,8 @@ def main():
     plot_count_llh.set_title("Operazioni eseguite con HEURISTICS LINKED LIST")
     plot_count_llh.set_ylabel("numero operazioni")
     plot_count_llh.set_xlabel("numero di vertici nel grafo")
+    plot_count_llh.legend(handles=[num_make_patch, num_find_patch, num_union_patch])
+    plt.savefig("images/count_llh.png")
 
     img_count_sf, plot_count_sf = plt.subplots()
     plot_count_sf.plot(x_axis, sf_operation_counter[0], color="red")
@@ -145,6 +159,10 @@ def main():
     plot_count_sf.set_title("Operazioni eseguite con SET FOREST")
     plot_count_sf.set_ylabel("numero operazioni")
     plot_count_sf.set_xlabel("numero di vertici del grafo")
+    plot_count_sf.legend(handles=[num_make_patch, num_find_patch, num_union_patch])
+    plt.savefig("images/count_sf.png")
+
+    num_find_normalized_patch = mpatch.Patch(color='green', label='find (normalizzato)')
 
     img_count_ll_normalized, plot_count_ll_normalized = plt.subplots()
     plot_count_ll_normalized.plot(x_axis, ll_operation_counter[0], color="red")
@@ -153,6 +171,8 @@ def main():
     plot_count_ll_normalized.set_title("Operazioni eseguite con LINKED LIST (normalizzato)")
     plot_count_ll_normalized.set_ylabel("numero operazioni")
     plot_count_ll_normalized.set_xlabel("numero di vertici nel grafo")
+    plot_count_ll_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
+    plt.savefig("images/count_ll_normalized.png")
 
     img_count_llh_normalized, plot_count_llh_normalized = plt.subplots()
     plot_count_llh_normalized.plot(x_axis, llh_operation_counter[0], color="red")
@@ -161,6 +181,8 @@ def main():
     plot_count_llh_normalized.set_title("Operazioni eseguite con HEURISTICS LINKED LIST (normalizzato)")
     plot_count_llh_normalized.set_ylabel("numero operazioni")
     plot_count_llh_normalized.set_xlabel("numero di vertici nel grafo")
+    plot_count_llh_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
+    plt.savefig("images/count_llh_normalized.png")
 
     img_count_sf_normalized, plot_count_sf_normalized = plt.subplots()
     plot_count_sf_normalized.plot(x_axis, sf_operation_counter[0], color="red")
@@ -169,25 +191,10 @@ def main():
     plot_count_sf_normalized.set_title("Operazioni eseguite con SET FOREST (normalizzato)")
     plot_count_sf_normalized.set_ylabel("numero operazioni")
     plot_count_sf_normalized.set_xlabel("numero di vertici del grafo")
-
-    ll_patch = mpatch.Patch(color='orange', label='linked list')
-    llh_patch = mpatch.Patch(color='lime', label='linked list heuristics')
-    sf_patch = mpatch.Patch(color='cyan', label='set forest')
-    plot_res.legend(handles=[ll_patch, llh_patch, sf_patch])
-
-    num_make_patch = mpatch.Patch(color='red', label='make_set')
-    num_find_patch = mpatch.Patch(color='green', label='find')
-    num_union_patch = mpatch.Patch(color='blue', label='union')
-    plot_count_ll.legend(handles=[num_make_patch, num_find_patch, num_union_patch])
-    plot_count_llh.legend(handles=[num_make_patch, num_find_patch, num_union_patch])
-    plot_count_sf.legend(handles=[num_make_patch, num_find_patch, num_union_patch])
-
-    num_find_normalized_patch = mpatch.Patch(color='green', label='find (normalizzato)')
-    plot_count_ll_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
-    plot_count_llh_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
     plot_count_sf_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
+    plt.savefig("images/count_sf_normalized.png")
 
-    # plt.imsave("test.png", img_res)
+    plt.show()
 
 
 if __name__ == '__main__':
