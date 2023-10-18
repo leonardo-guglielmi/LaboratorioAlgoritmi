@@ -63,18 +63,22 @@ def connect_components_forest(graph, vertex, counter):
 def main():
     max_dim = 510
     min_dim = 10
-    dim = max_dim - min_dim
-    num_iter_for_dim = 50
+    range_dim = max_dim - min_dim
+    num_iter_for_dim = 100
 
-    ll_time = numpy.zeros(dim)
+    ll_time = numpy.zeros(range_dim)
     llh_time = ll_time.copy()
     sf_time = ll_time.copy()
 
-    ll_operation_counter = numpy.zeros((3, dim))  # 0 make_set, 1 find, 2 union
-    llh_operation_counter = numpy.zeros((3, dim))
-    sf_operation_counter = numpy.zeros((3, dim))
+    ll_tot_time = 0
+    llh_tot_time = 0
+    sf_tot_time = 0
 
-    for i in range(dim):
+    ll_operation_counter = numpy.zeros((3, range_dim))  # 0 make_set, 1 find, 2 union
+    llh_operation_counter = numpy.zeros((3, range_dim))
+    sf_operation_counter = numpy.zeros((3, range_dim))
+
+    for i in range(range_dim):
         print(">> inizio iter ", i)
 
         for j in range(num_iter_for_dim):
@@ -89,14 +93,17 @@ def main():
             ll_begin = timer()
             connect_components_ll(graph, ll_vertex, ll_operation_counter[:, i])
             ll_time[i] += timer() - ll_begin
+            ll_tot_time += ll_time[i]
 
             llh_begin = timer()
             connect_components_llh(graph, llh_vertex, llh_operation_counter[:, i])
             llh_time[i] += timer() - llh_begin
+            llh_tot_time += llh_time[i]
 
             sf_begin = timer()
             connect_components_forest(graph, fi_vertex, sf_operation_counter[:, i])
             sf_time[i] += timer() - sf_begin
+            sf_tot_time += sf_time[i]
 
         ll_time[i] /= num_iter_for_dim
         llh_time[i] /= num_iter_for_dim
@@ -111,6 +118,31 @@ def main():
         sf_operation_counter[0, i] /= num_iter_for_dim
         sf_operation_counter[1, i] /= num_iter_for_dim
         sf_operation_counter[2, i] /= num_iter_for_dim
+
+    ll_avg_time = ll_tot_time/(num_iter_for_dim * range_dim)
+    llh_avg_time = llh_tot_time/(num_iter_for_dim * range_dim)
+    sf_avg_time = sf_tot_time/(num_iter_for_dim * range_dim)
+
+    # printing results
+    print("---- lista concatenata")
+    ll_tot_time_minutes = int(ll_tot_time/60)
+    print("tempi totale di esecuzione per ", range_dim, " iterazioni: ", ll_tot_time_minutes, " minuti e ",
+          f'{(ll_tot_time - ll_tot_time_minutes*60):.4f}', " secondi ")
+    print("tempo medio per ciascuna iterazione: ", f'{ll_avg_time:.4f}', "secondi")
+
+    print("---- lista concatenata con unione pesata")
+    llh_tot_time_minutes = int(llh_tot_time/60)
+    print("tempi totale di esecuzione per ", range_dim, " iterazioni: ", llh_tot_time_minutes, " minuti e ",
+          f'{(llh_tot_time - llh_tot_time_minutes * 60):.4f}', " secondi ")
+    print("tempo medio per ciascuna iterazione: ", f'{llh_avg_time:.4f}', "secondi")
+
+    print("---- foreste di alberi")
+    sf_tot_time_minutes = int(sf_tot_time/60)
+    print("tempi totale di esecuzione per ", range_dim, " iterazioni: ", sf_tot_time_minutes, " minuti e ",
+          f'{(sf_tot_time -sf_tot_time_minutes * 60):.4f}', " secondi ")
+    print("tempo medio per ciascuna iterazione: ", f'{sf_avg_time:.4f}', "secondi")
+
+    # display results with graphs
 
     x_axis = [i for i in range(min_dim, max_dim)]
 
@@ -165,31 +197,31 @@ def main():
     num_find_normalized_patch = mpatch.Patch(color='green', label='find (normalizzato)')
 
     img_count_ll_normalized, plot_count_ll_normalized = plt.subplots()
-    plot_count_ll_normalized.plot(x_axis, ll_operation_counter[0], color="red")
-    plot_count_ll_normalized.plot(x_axis, ll_operation_counter[1]/100, color="green")
-    plot_count_ll_normalized.plot(x_axis, ll_operation_counter[2], color="blue")
+    plot_count_ll_normalized.plot(x_axis[:100], ll_operation_counter[0, :100], color="red")
+    plot_count_ll_normalized.plot(x_axis[:100], ll_operation_counter[1, :100]/100, color="green")
+    plot_count_ll_normalized.plot(x_axis[:100], ll_operation_counter[2, :100], color="blue")
     plot_count_ll_normalized.set_title("Operazioni eseguite con LINKED LIST (normalizzato)")
-    plot_count_ll_normalized.set_ylabel("numero operazioni")
+    plot_count_ll_normalized.set_ylabel("numero operazioni (normalizzato)")
     plot_count_ll_normalized.set_xlabel("numero di vertici nel grafo")
     plot_count_ll_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
     plt.savefig("images/count_ll_normalized.png")
 
     img_count_llh_normalized, plot_count_llh_normalized = plt.subplots()
-    plot_count_llh_normalized.plot(x_axis, llh_operation_counter[0], color="red")
-    plot_count_llh_normalized.plot(x_axis, llh_operation_counter[1]/100, color="green")
-    plot_count_llh_normalized.plot(x_axis, llh_operation_counter[2], color="blue")
+    plot_count_llh_normalized.plot(x_axis[:100], llh_operation_counter[0, :100], color="red")
+    plot_count_llh_normalized.plot(x_axis[:100], llh_operation_counter[1, :100]/100, color="green")
+    plot_count_llh_normalized.plot(x_axis[:100], llh_operation_counter[2, :100], color="blue")
     plot_count_llh_normalized.set_title("Operazioni eseguite con HEURISTICS LINKED LIST (normalizzato)")
-    plot_count_llh_normalized.set_ylabel("numero operazioni")
+    plot_count_llh_normalized.set_ylabel("numero operazioni (normalizzato)")
     plot_count_llh_normalized.set_xlabel("numero di vertici nel grafo")
     plot_count_llh_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
     plt.savefig("images/count_llh_normalized.png")
 
     img_count_sf_normalized, plot_count_sf_normalized = plt.subplots()
-    plot_count_sf_normalized.plot(x_axis, sf_operation_counter[0], color="red")
-    plot_count_sf_normalized.plot(x_axis, sf_operation_counter[1]/100, color="green")
-    plot_count_sf_normalized.plot(x_axis, sf_operation_counter[2], color="blue")
+    plot_count_sf_normalized.plot(x_axis[:100], sf_operation_counter[0, :100], color="red")
+    plot_count_sf_normalized.plot(x_axis[:100], sf_operation_counter[1, :100]/100, color="green")
+    plot_count_sf_normalized.plot(x_axis[:100], sf_operation_counter[2, :100], color="blue")
     plot_count_sf_normalized.set_title("Operazioni eseguite con SET FOREST (normalizzato)")
-    plot_count_sf_normalized.set_ylabel("numero operazioni")
+    plot_count_sf_normalized.set_ylabel("numero operazioni (normalizzato)")
     plot_count_sf_normalized.set_xlabel("numero di vertici del grafo")
     plot_count_sf_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
     plt.savefig("images/count_sf_normalized.png")
