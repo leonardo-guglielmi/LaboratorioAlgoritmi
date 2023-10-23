@@ -61,10 +61,10 @@ def connect_components_forest(graph, vertex, counter):
 
 
 def main():
-    max_dim = 510
+    max_dim = 60
     min_dim = 10
     range_dim = max_dim - min_dim
-    num_iter_for_dim = 100
+    num_iter_for_dim = 20
 
     ll_time = numpy.zeros(range_dim)
     llh_time = ll_time.copy()
@@ -80,7 +80,6 @@ def main():
 
     for i in range(range_dim):
         print(">> inizio iter ", i)
-
         for j in range(num_iter_for_dim):
 
             ll_vertex = [ll.Element(k) for k in range(i + min_dim)]
@@ -124,19 +123,19 @@ def main():
     sf_avg_time = sf_tot_time/(num_iter_for_dim * range_dim)
 
     # printing results
-    print("---- lista concatenata")
+    print("- lista concatenata")
     ll_tot_time_minutes = int(ll_tot_time/60)
     print("tempi totale di esecuzione per ", range_dim, " iterazioni: ", ll_tot_time_minutes, " minuti e ",
           f'{(ll_tot_time - ll_tot_time_minutes*60):.4f}', " secondi ")
     print("tempo medio per ciascuna iterazione: ", f'{ll_avg_time:.4f}', "secondi")
 
-    print("---- lista concatenata con unione pesata")
+    print("- lista concatenata con unione pesata")
     llh_tot_time_minutes = int(llh_tot_time/60)
     print("tempi totale di esecuzione per ", range_dim, " iterazioni: ", llh_tot_time_minutes, " minuti e ",
           f'{(llh_tot_time - llh_tot_time_minutes * 60):.4f}', " secondi ")
     print("tempo medio per ciascuna iterazione: ", f'{llh_avg_time:.4f}', "secondi")
 
-    print("---- foreste di alberi")
+    print("- foreste di alberi")
     sf_tot_time_minutes = int(sf_tot_time/60)
     print("tempi totale di esecuzione per ", range_dim, " iterazioni: ", sf_tot_time_minutes, " minuti e ",
           f'{(sf_tot_time -sf_tot_time_minutes * 60):.4f}', " secondi ")

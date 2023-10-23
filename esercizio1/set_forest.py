@@ -16,4 +16,3 @@ def find(e):
     if e.father is not e:
         e.father = find(e.father)
     return e.father
-
