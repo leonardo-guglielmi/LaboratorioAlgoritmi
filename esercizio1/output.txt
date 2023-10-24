@@ -1,9 +1,0 @@
----- lista concatenata
-tempi totale di esecuzione per  500  iterazioni:  518  minuti e  58.1180  secondi
-tempo medio per ciascuna iterazione:  0.6228 secondi
----- lista concatenata con unione pesata
-tempi totale di esecuzione per  500  iterazioni:  495  minuti e  25.4427  secondi
-tempo medio per ciascuna iterazione:  0.5945 secondi
----- foreste di alberi
-tempi totale di esecuzione per  500  iterazioni:  548  minuti e  4.3195  secondi
-tempo medio per ciascuna iterazione:  0.6577 secondi

@@ -61,7 +61,7 @@ def connect_components_forest(graph, vertex, counter):
 
 
 def main():
-    max_dim = 60
+    max_dim = 1010
     min_dim = 10
     range_dim = max_dim - min_dim
     num_iter_for_dim = 20
@@ -157,7 +157,7 @@ def main():
     plot_res.set_ylabel("tempo impiegato (secondi)")
     plot_res.set_xlabel("numero di vertici nel grafo")
     plot_res.legend(handles=[ll_patch, llh_patch, sf_patch])
-    plt.savefig("images/result.png")
+    plt.savefig("esercizio1/images/results/result.png")
 
     num_make_patch = mpatch.Patch(color='red', label='make_set')
     num_find_patch = mpatch.Patch(color='green', label='find')
@@ -171,7 +171,7 @@ def main():
     plot_count_ll.set_ylabel("numero operazioni")
     plot_count_ll.set_xlabel("numero di vertici nel grafo")
     plot_count_ll.legend(handles=[num_make_patch, num_find_patch, num_union_patch])
-    plt.savefig("images/count_ll.png")
+    plt.savefig("esercizio1/images/results/count_ll.png")
 
     img_count_llh, plot_count_llh = plt.subplots()
     plot_count_llh.plot(x_axis, llh_operation_counter[0], color="red")
@@ -181,7 +181,7 @@ def main():
     plot_count_llh.set_ylabel("numero operazioni")
     plot_count_llh.set_xlabel("numero di vertici nel grafo")
     plot_count_llh.legend(handles=[num_make_patch, num_find_patch, num_union_patch])
-    plt.savefig("images/count_llh.png")
+    plt.savefig("esercizio1/images/results/count_llh.png")
 
     img_count_sf, plot_count_sf = plt.subplots()
     plot_count_sf.plot(x_axis, sf_operation_counter[0], color="red")
@@ -191,7 +191,7 @@ def main():
     plot_count_sf.set_ylabel("numero operazioni")
     plot_count_sf.set_xlabel("numero di vertici del grafo")
     plot_count_sf.legend(handles=[num_make_patch, num_find_patch, num_union_patch])
-    plt.savefig("images/count_sf.png")
+    plt.savefig("esercizio1/images/results/count_sf.png")
 
     num_find_normalized_patch = mpatch.Patch(color='green', label='find (normalizzato)')
 
@@ -203,7 +203,7 @@ def main():
     plot_count_ll_normalized.set_ylabel("numero operazioni (normalizzato)")
     plot_count_ll_normalized.set_xlabel("numero di vertici nel grafo")
     plot_count_ll_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
-    plt.savefig("images/count_ll_normalized.png")
+    plt.savefig("esercizio1/images/results/count_ll_normalized.png")
 
     img_count_llh_normalized, plot_count_llh_normalized = plt.subplots()
     plot_count_llh_normalized.plot(x_axis[:100], llh_operation_counter[0, :100], color="red")
@@ -213,7 +213,7 @@ def main():
     plot_count_llh_normalized.set_ylabel("numero operazioni (normalizzato)")
     plot_count_llh_normalized.set_xlabel("numero di vertici nel grafo")
     plot_count_llh_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
-    plt.savefig("images/count_llh_normalized.png")
+    plt.savefig("esercizio1/images/results/count_llh_normalized.png")
 
     img_count_sf_normalized, plot_count_sf_normalized = plt.subplots()
     plot_count_sf_normalized.plot(x_axis[:100], sf_operation_counter[0, :100], color="red")
@@ -223,7 +223,7 @@ def main():
     plot_count_sf_normalized.set_ylabel("numero operazioni (normalizzato)")
     plot_count_sf_normalized.set_xlabel("numero di vertici del grafo")
     plot_count_sf_normalized.legend(handles=[num_make_patch, num_find_normalized_patch, num_union_patch])
-    plt.savefig("images/count_sf_normalized.png")
+    plt.savefig("esercizio1/images/results/count_sf_normalized.png")
 
     plt.show()
 
