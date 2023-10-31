@@ -61,10 +61,10 @@ def connect_components_forest(graph, vertex, counter):
 
 
 def main():
-    max_dim = 1010
+    max_dim = 510
     min_dim = 10
     range_dim = max_dim - min_dim
-    num_iter_for_dim = 20
+    num_iter_for_dim = 100
 
     ll_time = numpy.zeros(range_dim)
     llh_time = ll_time.copy()
@@ -92,20 +92,20 @@ def main():
             ll_begin = timer()
             connect_components_ll(graph, ll_vertex, ll_operation_counter[:, i])
             ll_time[i] += timer() - ll_begin
-            ll_tot_time += ll_time[i]
 
             llh_begin = timer()
             connect_components_llh(graph, llh_vertex, llh_operation_counter[:, i])
             llh_time[i] += timer() - llh_begin
-            llh_tot_time += llh_time[i]
 
             sf_begin = timer()
             connect_components_forest(graph, fi_vertex, sf_operation_counter[:, i])
             sf_time[i] += timer() - sf_begin
-            sf_tot_time += sf_time[i]
 
+        ll_tot_time += ll_time[i]
         ll_time[i] /= num_iter_for_dim
+        llh_tot_time += llh_time[i]
         llh_time[i] /= num_iter_for_dim
+        sf_tot_time += sf_time[i]
         sf_time[i] /= num_iter_for_dim
 
         ll_operation_counter[0, i] /= num_iter_for_dim
